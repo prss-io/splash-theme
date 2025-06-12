@@ -1,7 +1,7 @@
 <p>
   <img src="public/thumbnail.png" width="500" />
   <h2>Splash</h2>
-  <blockquote>Shadcn inspired PRSS theme, suitable as starting splash for custom sites.</blockquote>
+  <blockquote>Shadcn inspired PRSS theme, suitable as starting point for custom sites.</blockquote>
 </p>
 
 <div align="right">

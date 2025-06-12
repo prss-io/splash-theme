@@ -1,8 +1,9 @@
 {
   "name": "@prss/splash-theme",
   "title": "Splash",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Francisco Hodge",
+  "homepage": "https://github.com/prss-io/splash-theme",
   "description": "Splash Theme for PRSS",
   "license": "MIT",
   "type": "blog",

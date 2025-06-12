@@ -21,7 +21,8 @@ const Docs = data => {
     sidebarMenu,
     footerCta,
     warningHtml,
-    contentFooterHtml
+    contentFooterHtml,
+    heroImageUrl
   } = PRSS.getProp("vars") as IVars;
 
   const { content, uuid: postId, title: postTitle } = PRSS.getProp("item");
@@ -110,35 +111,32 @@ const Docs = data => {
   return (
     <Page className="page-docs">
       <Header />
-      <main className="pb-6 col">
-        <section className="flex justify-center mx-auto flex max-w-screen-xl flex-col gap-20 lg:flex-row mt-6">
-          <div className="relative mx-auto flex max-w-screen-xl w-full flex-col">
-            {/* Title Section */}
-            <div className="">
-              <div className="flex flex-col lg:flex-row lg:items-center gap-4">
-                <div className="flex-1">
-                  <h1 className="text-3xl md:text-4xl font-bold lg:text-5xl mb-0">{postTitle}</h1>
-                </div>
-                {PRSS.getProp("vars")?.asideHtml && (
-                  <div className="lg:w-1/3">
-                    <Aside name="asideHtml" />
+      <main className="pb-6">
+        <div class="page-hero" style={{ backgroundColor: "var(--background-alt-color)" }}>
+          {(heroImageUrl || featuredImageUrl) && (
+            <div class="hero__bg" style={{ backgroundImage: `url(${heroImageUrl || featuredImageUrl})` }} />
+          )}
+          <div class="row z-1">
+            <div class={cx("col", "col-12")}>
+              <div class="hero__inner">
+                <div class="hero__right">
+                  <div className="flex flex-col lg:flex-row lg:items-center gap-4">
+                    <div className="flex-1">
+                      <h1 className="text-3xl md:text-4xl font-bold lg:text-5xl mb-0">{postTitle}</h1>
+                    </div>
+                    {PRSS.getProp("vars")?.asideHtml && (
+                      <div className="lg:w-1/3">
+                        <Aside name="asideHtml" />
+                      </div>
+                    )}
                   </div>
-                )}
+                </div>
               </div>
             </div>
-
-            {/* Featured Image Banner */}
-            {featuredImageUrl && (
-              <div className="hero__left">
-                <div 
-                  className="hero__image my-4 mb-10 w-full h-48 bg-cover bg-center overflow-hidden"
-                  style={{
-                    backgroundImage: `url(${featuredImageUrl})`
-                  }}
-                />
-              </div>
-            )}
-
+          </div>
+        </div>
+        <section className="flex justify-center mx-auto flex max-w-screen-xl flex-col gap-20 lg:flex-row mt-8">
+          <div className="relative mx-auto flex max-w-screen-xl w-full flex-col">
             {/* Content Layout */}
             <div className="flex flex-col lg:flex-row gap-8">
               {/* Documentation Sidebar */}
@@ -176,7 +174,7 @@ const Docs = data => {
               )}
 
               {/* Main Content */}
-              <div className="flex-1">
+              <div className="flex-1 col">
                 <div className="content space-y-6">
                   {/* Warning Alert */}
                   {warningHtml && (

@@ -24,38 +24,27 @@ const Post = data => {
   return (
     <Page className="page-post">
       <Header />
-      <main className="pb-6 col">
+      <main className="pb-6">
+        <div class="page-hero" style={{ backgroundColor: "var(--background-alt-color)" }}>
+          {(featuredImageUrl) && (
+            <div class="hero__bg" style={{ backgroundImage: `url(${featuredImageUrl})` }} />
+          )}
+        </div>
         <section className="flex justify-center">
-          <div className="relative mx-auto flex max-w-screen-xl flex-col gap-2 mt-6 w-full">
+          <div className="relative mx-auto flex max-w-screen-xl flex-col gap-2 mt-6 w-full col md:max-w-screen-md">
 
             {/* Header - Full Width */}
             <header className="flex flex-col gap-5 py-6">
               <h1 className="text-3xl md:text-4xl font-bold lg:text-5xl post__title mb-0" style={{ marginBottom: 0 }}>{postTitle}</h1>
-              {createdAt && (
-                <div className="mb-2 flex items-center space-x-2 md:mb-4 text-sm">
+              <div className="flex items-center gap-2 text-sm md:text-base">
+                <span className="text-gray-500">
                   {PRSS.formattedDate(createdAt)}
-                </div>
-              )}
-
-              {featuredImageUrl && (
-              <div className="mb-8 relative max-h-[600px]">
-                <img 
-                  src={featuredImageUrl} 
-                  alt={featuredImageAlt || postTitle} 
-                  className="w-full h-full object-cover max-h-[600px]"
-                />
-                {featuredImageAuthor && featuredImageAuthorLink && (
-                  <div className="text-xs justify-end flex mt-1">
-                    <span>
-                      Photo by{" "}
-                      <a href={featuredImageAuthorLink} target="_blank" rel="noreferrer" className="hover:underline">
-                        {featuredImageAuthor} via Pexels
-                      </a>
-                    </span>
-                  </div>
-                )}
+                </span>
+                <span>•</span>
+                <span className="text-gray-500">
+                  Photo by{" "} <a href={featuredImageAuthorLink} target="_blank" rel="noreferrer" className="hover:underline">{featuredImageAuthor} via Pexels</a>
+                </span>
               </div>
-            )}
               
               {PRSS.getProp("vars")?.asideHtml && (
                 <div className="mt-4">

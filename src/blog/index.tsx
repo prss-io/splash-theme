@@ -12,8 +12,8 @@ const Blog = data => {
   (window as any).PRSS = PRSS;
 
   const { rootPath } = data;
-  const { blogPosts, currentPage, totalPages } = PRSS.getProp("vars") as any;
-  const { content } = PRSS.getProp("item");
+  const { blogPosts, currentPage, totalPages, heroImageUrl, featuredImageUrl } = PRSS.getProp("vars") as any;
+  const { title, content } = PRSS.getProp("item");
   const items = PRSS.getItems(["post", "post2"], true, blogPosts);
   const adjustedRootPath = currentPage === 1 ? rootPath : `../${rootPath}`;
 
@@ -35,10 +35,25 @@ const Blog = data => {
     <Page className="page-blog">
       <Header />
       <main className="pb-6">
+        <div class="page-hero" style={{ backgroundColor: "var(--background-alt-color)" }}>
+          {(heroImageUrl || featuredImageUrl) && (
+            <div class="hero__bg" style={{ backgroundImage: `url(${heroImageUrl || featuredImageUrl})` }} />
+          )}
+          <div class="row z-1">
+            <div class={cx("col", "col-12")}>
+              <div class="hero__inner">
+                <div class="hero__right">
+                  {title && (
+                    <h1 class="hero__title">{title}</h1>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <section className="flex justify-center mx-auto flex max-w-screen-xl flex-col gap-20 lg:flex-row mt-6">
           <div className="container flex flex-col">
-            <h1 className="mb-6 page__title">Blog</h1>
-            <div className="post-content mb-12 text-lg text-muted-foreground md:text-xl lg:max-w-3xl">
+            <div className="post-content mb-12 text-lg text-muted-foreground md:text-xl">
               <div
                 className="post-inner-content page__content"
                 dangerouslySetInnerHTML={{

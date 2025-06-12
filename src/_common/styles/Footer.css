@@ -9,6 +9,7 @@
   align-items: center;
   gap: 3px;
   font-weight: 600;
+  font-family: "Open Sans", sans-serif;
 }
 .page footer.page-footer .footer-shoutout span {
   line-height: 16px;

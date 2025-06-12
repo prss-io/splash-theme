@@ -30,16 +30,16 @@ const Home = data => {
   });
 
   return (
-    <Page className="page-blog">
+    <Page className="page-home">
       <Header />
       <main className="pb-6">
-        <div class="home-hero" style={{ backgroundColor: "var(--color-bg)" }}>
+        <div class="page-hero" style={{ backgroundColor: "var(--background-alt-color)" }}>
           {(heroImageUrl || featuredImageUrl) && (
             <div class="hero__bg" style={{ backgroundImage: `url(${heroImageUrl || featuredImageUrl})` }} />
           )}
-          <div class="row">
-            <div class={cx("col", "col-12", heroClass)}>
-              <div class="hero__inner">
+          <div class="row z-1">
+            <div class={cx("container", "col-12", heroClass)}>
+              <div class="col hero__inner">
                 <div class="hero__right">
                   {heroTitle && (
                     <h1 class="hero__title">{heroTitle}</h1>
@@ -58,12 +58,12 @@ const Home = data => {
           </div>
         </div>
         <section className="flex justify-center">
-          <div className="relative mx-auto flex max-w-screen-xl flex-col gap-12 w-full">
+          <div className="relative mx-auto overflow-hidden flex max-w-screen-xl flex-col gap-12 w-full">
             {/* Articles Section */}
-            <div className="w-full">
+            <div className="w-full pt-4">
               <div className="row animate">
                 {posts.map((post) => (
-                  <a key={post.id} href={post.url} className="article col col-8 push-2 col-d-12 push-d-0">
+                  <a key={post.id} href={post.url} className="article col mx-auto md:max-w-screen-md w-full">
                     <div className="article__content">
                       <div className="p-5 flex flex-col flex-grow">
                         <div className="mt-auto flex items-center justify-between article__meta">
@@ -81,10 +81,10 @@ const Home = data => {
             </div>
           </div>
         </section>
-        <section className="flex justify-center mx-auto flex max-w-screen-xl flex-col gap-20 lg:flex-row mt-6">
-          <div className="container flex flex-col">
+        <section className="flex justify-center mx-auto flex col md:max-w-screen-md mt-6">
+          <div className="container flex flex-col justify-end">
             {/* Blog link with arrow */}
-            <div className="article col col-8 push-2 col-d-12 push-d-0">
+            <div className="">
               <a 
                 href={`${rootPath}blog`} 
                 className="group inline-flex items-center gap-2 text-primary font-medium hover:underline"

@@ -9,6 +9,10 @@ const Post = data => {
   PRSS.init(data);
   (window as any).PRSS = PRSS;
 
+  const {
+      featuredImageUrl,
+      heroImageUrl
+    } = PRSS.getProp("vars") as IVars;
   const { content } = PRSS.getProp("item");
   const sidebarHtml = PRSS.getProp("sidebarHtml");
 
@@ -16,13 +20,18 @@ const Post = data => {
     <Page className="page-post page-single">
       <Header />
       <main className="pb-6">
+        <div class="page-hero" style={{ backgroundColor: "var(--background-alt-color)" }}>
+          {(heroImageUrl || featuredImageUrl) && (
+            <div class="hero__bg" style={{ backgroundImage: `url(${heroImageUrl || featuredImageUrl})` }} />
+          )}
+        </div>
         <section className="post-content flex justify-center">
-          <div className="relative mx-auto flex max-w-screen-xl flex-col w-full mt-6">
-            <div className="flex flex-col lg:flex-row gap-10">
+          <div className="relative mx-auto flex max-w-screen-xl flex-col w-full mt-8">
+            <div className="container flex flex-col lg:flex-row gap-10">
               <div className={cx("w-full", {
                 "lg:w-[70%]": sidebarHtml
               })}>
-                <div className="col post-inner-content page__content prose dark:prose-invert max-w-none pb-8" dangerouslySetInnerHTML={{
+                <div className="post-inner-content page__content prose dark:prose-invert max-w-none pb-8" dangerouslySetInnerHTML={{
                     __html: content
                 }}></div>
               </div>

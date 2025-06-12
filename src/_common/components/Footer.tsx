@@ -9,7 +9,7 @@ const Footer = () => {
   const { title } = PRSS.getProp("site");
 
   return (
-    <section className="py-6 flex justify-center relative mx-auto flex max-w-screen-xl">
+    <section className="py-6 flex justify-center relative mx-auto flex max-w-screen-xl w-full">
       <div className="container">
         <footer className="page-footer">
           <div className="mt-20 flex flex-col justify-between gap-4 pt-8 text-center text-sm font-medium text-muted-foreground lg:flex-row lg:items-center lg:text-left">

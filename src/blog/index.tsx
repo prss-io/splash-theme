@@ -51,7 +51,7 @@ const Blog = data => {
             </div>
           </div>
         </div>
-        <section className="flex justify-center mx-auto flex max-w-screen-xl flex-col gap-20 lg:flex-row mt-6">
+        <section className="flex justify-center mx-auto flex max-w-screen-xl flex-col gap-20 lg:flex-row mt-10">
           <div className="container flex flex-col">
             <div className="post-content mb-12 text-lg text-muted-foreground md:text-xl">
               <div

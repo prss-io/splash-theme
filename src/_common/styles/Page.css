@@ -3592,7 +3592,7 @@ table td {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   min-height: 90px;
   box-sizing: border-box;
   color: white;

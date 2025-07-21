@@ -1,11 +1,13 @@
 import React from "react";
-import * as PRSS from "prss";
+import * as PRSS from "@prss/ui";
 import { ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Page from "@/components/Page";
 import { isset } from "@/lib/utils";
 import Aside from "@/components/Aside";
+
+import ContentRenderer from "@prss/ui/build/ContentRenderer";
 
 const Post = data => {
   PRSS.init(data);
@@ -25,9 +27,9 @@ const Post = data => {
     <Page className="page-post">
       <Header />
       <main className="pb-6">
-        <div class="page-hero" style={{ backgroundColor: "var(--background-alt-color)" }}>
+        <div className="page-hero" style={{ backgroundColor: "var(--background-alt-color)" }}>
           {(featuredImageUrl) && (
-            <div class="hero__bg" style={{ backgroundImage: `url(${featuredImageUrl})` }} />
+            <div className="hero__bg" style={{ backgroundImage: `url(${featuredImageUrl})` }} />
           )}
         </div>
         <section className="flex justify-center">
@@ -56,11 +58,9 @@ const Post = data => {
             {/* Post Content - Full Width */}
             <div className="w-full">
                 <div className="post-content prose dark:prose-invert max-w-none pb-12 border-b">
-                  <div
+                  <ContentRenderer 
+                    content={content}
                     className="post-inner-content page__content"
-                    dangerouslySetInnerHTML={{
-                      __html: content
-                    }}
                   />
                 </div>
 

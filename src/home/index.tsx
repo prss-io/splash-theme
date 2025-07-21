@@ -4,7 +4,9 @@ import cx from "classnames";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Page from "@/components/Page";
-import * as PRSS from "prss";
+import * as PRSS from "@prss/ui";
+
+import ContentRenderer from "@prss/ui/build/ContentRenderer";
 
 const Home = data => {
   PRSS.init(data);
@@ -33,24 +35,27 @@ const Home = data => {
     <Page className="page-home">
       <Header />
       <main className="pb-6">
-        <div class="page-hero" style={{ backgroundColor: "var(--background-alt-color)" }}>
+        <div className="page-hero" style={{ backgroundColor: "var(--background-alt-color)" }}>
           {(heroImageUrl || featuredImageUrl) && (
-            <div class="hero__bg" style={{ backgroundImage: `url(${heroImageUrl || featuredImageUrl})` }} />
+            <div className="hero__bg" style={{ backgroundImage: `url(${heroImageUrl || featuredImageUrl})` }} />
           )}
-          <div class="row z-1">
+          <div className="row z-1">
             <div class={cx("container", "col-12", heroClass)}>
-              <div class="col hero__inner">
-                <div class="hero__right">
+              <div className="col hero__inner">
+                <div className="hero__right">
                   {heroTitle && (
-                    <h1 class="hero__title">{heroTitle}</h1>
+                    <h1 className="hero__title">{heroTitle}</h1>
                   )}
 
                   {heroMessage && (
-                    <p class="hero__description">{heroMessage}</p>
+                    <p className="hero__description">{heroMessage}</p>
                   )}
 
                   {content ? (
-                    <div className="post-inner-content page__content" dangerouslySetInnerHTML={{ __html: content }} />
+                    <ContentRenderer 
+                      content={content}
+                      className="post-inner-content page__content"
+                    />
                   ) : null}
                 </div>
               </div>

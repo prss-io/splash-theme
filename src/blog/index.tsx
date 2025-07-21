@@ -5,16 +5,18 @@ import cx from "classnames";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Page from "@/components/Page";
-import * as PRSS from "prss";
+import * as PRSS from "@prss/ui";
+
+import ContentRenderer from "@prss/ui/build/ContentRenderer";
 
 const Blog = data => {
   PRSS.init(data);
   (window as any).PRSS = PRSS;
 
   const { rootPath } = data;
-  const { blogPosts, currentPage, totalPages, heroImageUrl, featuredImageUrl } = PRSS.getProp("vars") as any;
-  const { title, content } = PRSS.getProp("item");
-  const items = PRSS.getItems(["post", "post2"], true, blogPosts);
+  const { blogPosts, currentPage, totalPages, heroImageUrl, featuredImageUrl, category } = PRSS.getProp("vars") as any;
+  const { title, content, slug } = PRSS.getProp("item");
+  const items = PRSS.getItems(["post", "post2"], true, blogPosts, category);
   const adjustedRootPath = currentPage === 1 ? rootPath : `../${rootPath}`;
 
   const posts = items.map((post) => {
@@ -35,16 +37,16 @@ const Blog = data => {
     <Page className="page-blog">
       <Header />
       <main className="pb-6">
-        <div class="page-hero" style={{ backgroundColor: "var(--background-alt-color)" }}>
+        <div className="page-hero" style={{ backgroundColor: "var(--background-alt-color)" }}>
           {(heroImageUrl || featuredImageUrl) && (
-            <div class="hero__bg" style={{ backgroundImage: `url(${heroImageUrl || featuredImageUrl})` }} />
+            <div className="hero__bg" style={{ backgroundImage: `url(${heroImageUrl || featuredImageUrl})` }} />
           )}
-          <div class="row z-1">
+          <div className="row z-1">
             <div class={cx("col", "col-12")}>
-              <div class="hero__inner">
-                <div class="hero__right">
+              <div className="hero__inner">
+                <div className="hero__right">
                   {title && (
-                    <h1 class="hero__title">{title}</h1>
+                    <h1 className="hero__title">{title}</h1>
                   )}
                 </div>
               </div>
@@ -54,11 +56,9 @@ const Blog = data => {
         <section className="flex justify-center mx-auto flex max-w-screen-xl flex-col gap-20 lg:flex-row mt-10">
           <div className="container flex flex-col">
             <div className="post-content mb-12 text-lg text-muted-foreground md:text-xl">
-              <div
+              <ContentRenderer 
+                content={content}
                 className="post-inner-content page__content"
-                dangerouslySetInnerHTML={{
-                  __html: content
-                }}
               />
             </div>
 
@@ -129,7 +129,7 @@ const Blog = data => {
                   <li className="page-item">
                     <a
                       className="page-link"
-                      href={`${adjustedRootPath}blog/${currentPage - 1 === 1 ? "" : currentPage - 1}`}
+                      href={`${adjustedRootPath}${slug}/${currentPage - 1 === 1 ? "" : currentPage - 1}`}
                     >
                         <ArrowLeft className="right-arr d-inline h-6 w-6 transition-transform group-hover:translate-x-1" />
                     </a>
@@ -141,7 +141,7 @@ const Blog = data => {
                   return (
                     <li key={i} className="page-item">
                       <a
-                        href={`${pageNumber === 1 ? `${adjustedRootPath}blog/` : `${adjustedRootPath}blog/${pageNumber}/`}`}
+                        href={`${pageNumber === 1 ? `${adjustedRootPath}${slug}/` : `${adjustedRootPath}${slug}/${pageNumber}/`}`}
                         className={cx("page-link", { active: isActive })}
                       >
                         {pageNumber}
@@ -153,7 +153,7 @@ const Blog = data => {
                   <li className="page-item">
                     <a
                       className="page-link"
-                      href={`${adjustedRootPath}blog/${currentPage + 1}`}
+                      href={`${adjustedRootPath}${slug}/${currentPage + 1}`}
                     >
                         <ArrowRight className="right-arr d-inline h-6 w-6 transition-transform group-hover:translate-x-1" />
                     </a>

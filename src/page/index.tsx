@@ -1,9 +1,11 @@
 import React from "react";
-import * as PRSS from "prss";
+import * as PRSS from "@prss/ui";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Page from "@/components/Page";
 import { cx } from "@/lib/utils";
+
+import ContentRenderer from "@prss/ui/build/ContentRenderer";
 
 const Post = data => {
   PRSS.init(data);
@@ -20,9 +22,9 @@ const Post = data => {
     <Page className="page-post page-single">
       <Header />
       <main className="pb-6">
-        <div class="page-hero" style={{ backgroundColor: "var(--background-alt-color)" }}>
+        <div className="page-hero" style={{ backgroundColor: "var(--background-alt-color)" }}>
           {(heroImageUrl || featuredImageUrl) && (
-            <div class="hero__bg" style={{ backgroundImage: `url(${heroImageUrl || featuredImageUrl})` }} />
+            <div className="hero__bg" style={{ backgroundImage: `url(${heroImageUrl || featuredImageUrl})` }} />
           )}
         </div>
         <section className="post-content flex justify-center">
@@ -31,9 +33,10 @@ const Post = data => {
               <div className={cx("w-full", {
                 "lg:w-[70%]": sidebarHtml
               })}>
-                <div className="post-inner-content page__content prose dark:prose-invert max-w-none pb-8" dangerouslySetInnerHTML={{
-                    __html: content
-                }}></div>
+                <ContentRenderer 
+                  content={content}
+                  className="post-inner-content page__content prose dark:prose-invert max-w-none pb-8"
+                />
               </div>
               
               {sidebarHtml && (

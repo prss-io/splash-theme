@@ -2,3 +2,4 @@ node_modules
 .vscode
 /coverage
 .github/copilot-instructions.md
+.github/prompts
